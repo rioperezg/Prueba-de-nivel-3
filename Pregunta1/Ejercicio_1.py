@@ -42,3 +42,25 @@ la opción más lógica;
 Thor tiene el poder para destruir ejércitos completos;
 no se debe utilizar árbol balanceado.
 """
+
+# La pregunta es: Como empezamos? Hacemos una funcion y que pase por parametros los distintos superheroes? En tal caso, para responder
+# a las preguntas, para ir distribuyendo el arbol habria que poner unso ciertos criterios
+from Arboles_Binarios import nodoArbol, Cola, nodoCola
+# Convertiremos la lista de superheroes en una arbol de forma dinamica
+# Funcion insertar nodo: si dato es menor que raiz.info entonces insertar_nodo(raiz.izq, dato) y si es mayor que raiz.info entonces
+# insertar_nodo(raiz.der, dato): De modo que que el primer nodo se meta en la rama izq de la raiz y el nodo de der....
+def Marvel_Arbol(listaSuperHeroes):
+    raiz = None
+    if listaSuperHeroes == []:   
+        return "El Arbol se ha completado"
+    else:
+        dato1 = listaSuperHeroes[0]
+        listaSuperHeroes.pop(0)
+        respuesta = input("Esta el superheroe destinado a misiones interg")
+        if respuesta == "si":
+            raiz = nodoArbol.insertar_nodo(raiz, dato1)
+            return Marvel_Arbol(listaSuperHeroes)
+        elif respuesta == "no":
+            
+
+    
