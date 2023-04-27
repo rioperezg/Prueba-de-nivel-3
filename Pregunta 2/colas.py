@@ -48,3 +48,19 @@ class Cola(object):
             dato = Cola.mover_al_final(cola)
             print(dato)
             i += 1
+    def arribo_con_prioridad(cola, elemento, prioridad):
+        nodo = nodoCola()
+        nodo.info = elemento
+        nodo.prioridad = prioridad
+        if cola.frente is None or prioridad < cola.frente.prioridad:
+            nodo.sig = cola.frente
+            cola.frente = nodo
+        else:
+            ant = cola.frente
+            act = cola.frente.sig
+            while(act is not None and act.prioridad <= prioridad):
+                ant = act
+                act = act.sig
+            nodo.sig = act
+            ant.sig = nodo
+        cola.tamaño += 1

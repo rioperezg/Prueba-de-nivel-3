@@ -20,3 +20,25 @@ realizar la atención de la cola almacenando los pedidos de mayor prioridad en u
  
 luego de cada atención se podrá agregar un pedido a la cola
 """
+from colas import nodoCola, Cola
+# La idea principal sera primero almacenar todos los pedidos para luego hacer la atencion
+class Pedido(object):
+    def __init__(self, nombre, multiverso, descripcion):
+        self.nombre = nombre
+        self.multiverso = multiverso
+        self.descripcion = descripcion
+class DatoPedido(object):
+    def __init__(self) -> None:
+        self.dato = None
+    def bitacora(nombre, multiverso, descripcion):
+        pedidos = Cola()
+        bitacora = Cola()
+        # Crearemos la cola de pedidos sin ordenar con un input
+        Pedido = input("Teclee 1 si quiere ingresar un pedido:")
+        if Pedido == "1":
+           nombre = input("NOMBRE >")
+           multiverso = input("MULTIVERSO >")
+           descripcion = input("DESCRIPCION >")
+        else:
+
+        
