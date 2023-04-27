@@ -38,12 +38,12 @@ class DatoPedido(object):
         # Crearemos la cola de pedidos sin ordenar con un input
         pedido = input("Teclee 1 si quiere ingresar un pedido:")
         while(pedido == "1"):
-            pedido = input("Teclee 1 si quiere ingresar un pedido:")
             nombre = input("NOMBRE > ")
             multiverso = input("MULTIVERSO > ")
             descripcion = input("DESCRIPCION > ")
             dato = Pedido(nombre, multiverso, descripcion)
             Cola.arribo(pedidos, dato)
+            pedido = input("Teclee 1 si quiere ingresar un pedido:")
         while(not Cola.cola_vacia(pedidos)):
             Cola.atencion(pedidos, dato)
             if (dato.nombre == "Gran Conquistador" or dato.multiverso == "616" or dato.descripcion == "El que permanece"):
