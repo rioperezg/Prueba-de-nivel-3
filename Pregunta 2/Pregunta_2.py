@@ -31,14 +31,24 @@ class DatoPedido(object):
     def __init__(self) -> None:
         self.dato = None
     def bitacora(nombre, multiverso, descripcion):
+        mayor = 3
+        media = 2
         pedidos = Cola()
-        bitacora = Cola()
+        Bitacora = Cola()
         # Crearemos la cola de pedidos sin ordenar con un input
-        Pedido = input("Teclee 1 si quiere ingresar un pedido:")
-        if Pedido == "1":
-           nombre = input("NOMBRE >")
-           multiverso = input("MULTIVERSO >")
-           descripcion = input("DESCRIPCION >")
-        else:
-
-        
+        pedido = input("Teclee 1 si quiere ingresar un pedido:")
+        while(pedido == "1"):
+            nombre = input("NOMBRE >")
+            multiverso = input("MULTIVERSO >")
+            descripcion = input("DESCRIPCION >")
+            dato = Pedido(nombre, multiverso, descripcion)
+            Cola.arribo(pedidos, dato)
+        while(not Cola.cola_vacia(pedidos)):
+            Cola.atencion(pedidos, dato)
+            if (dato.nombre == "Gran Conquistador" or dato.multiverso == "616" or dato.descripcion == "El que permanece"):
+               Cola.arribo_con_prioridad(pedidos, dato, mayor)
+               Cola.arribo(Bitacora, dato)
+            elif(dato.nombre == "Khan que todo lo sabe" or dato.multiverso == "838" or dato.descripcion == "Carnicero de Dioses"):
+                Cola.arribo_con_prioridad(pedidos, dato, media)
+            else:
+                Cola.arribo(pedidos, dato)
