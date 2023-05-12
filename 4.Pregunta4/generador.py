@@ -35,9 +35,11 @@ def generador2():
 def Generar_lista():
     i = 0
     nums = Lista()
-
-    while(i != generador1()):
+    n = generador1()
+    while(i != n):
         i += 1
         num = random.uniform(0, 100)
         Lista.insertar(nums, num, campo=None)
+    
+    
 
