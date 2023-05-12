@@ -18,10 +18,20 @@ Para cada número muestra durante el redondeo, el número normal y después del 
 Finalmente devolverás la lista de números redondeados.
 El objetivo de este ejercicio es  la reutilización de código y los módulos random y math.
 """
+import random, math
 def leer_numero(ini, fin, mensaje):
     num = input(mensaje)
     while not (ini <= num <= fin):
         num = input(mensaje)
     return num
-def generador():
+def generador1():
     numeros = leer_numero(1, 20, "¿Cuántos números quieres generar? [1-20]: ")
+    return numeros
+def generador2():
+    modo = leer_numero(1, 3, "¿Cómo quieres redondear los números? [1]Al alza [2]A la baja [3]Normal: ")
+    return modo
+def Generar_lista():
+    i = 0
+    
+    while(i != generador1()):
+        i += 1
