@@ -67,6 +67,9 @@ def Marvel_Arbol(listaSuperHeroes, misiones):
             raiz = nodoArbol.insertar_nodo(raiz, nodo)
             return Marvel_Arbol(listaSuperHeroes, misiones)
         elif raiz == "no":
+            nodo.izq = None
+            nodo.der = misiones[1]
+            raiz = nodoArbol.insertar_nodo(raiz, nodo)
             
             
 
