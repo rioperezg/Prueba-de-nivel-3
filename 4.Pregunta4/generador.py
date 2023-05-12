@@ -18,7 +18,9 @@ Para cada número muestra durante el redondeo, el número normal y después del 
 Finalmente devolverás la lista de números redondeados.
 El objetivo de este ejercicio es  la reutilización de código y los módulos random y math.
 """
+from listas import Lista
 import random, math
+from random import randint
 def leer_numero(ini, fin, mensaje):
     num = input(mensaje)
     while not (ini <= num <= fin):
@@ -32,6 +34,10 @@ def generador2():
     return modo
 def Generar_lista():
     i = 0
-    
+    nums = Lista()
+
     while(i != generador1()):
         i += 1
+        num = random.uniform(0, 100)
+        Lista.insertar(nums, num, campo=None)
+
