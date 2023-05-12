@@ -49,18 +49,25 @@ from Arboles_Binarios import nodoArbol, Cola, nodoCola
 # Convertiremos la lista de superheroes en una arbol de forma dinamica
 # Funcion insertar nodo: si dato es menor que raiz.info entonces insertar_nodo(raiz.izq, dato) y si es mayor que raiz.info entonces
 # insertar_nodo(raiz.der, dato): De modo que que el primer nodo se meta en la rama izq de la raiz y el nodo de der....
-def Marvel_Arbol(listaSuperHeroes):
-    raiz = None
-    if listaSuperHeroes == []:   
-        return "El Arbol se ha completado"
+def Marvel_Arbol(listaSuperHeroes, misiones):
+    nodo = nodoArbol()
+    if listaSuperHeroes == []: 
+        if misiones == []:  
+           return "El Arbol se ha completado"
     else:
         dato1 = listaSuperHeroes[0]
+        mision1 = misiones[0]
+        print("El superheroe que se va a insertar es: ", dato1)
         listaSuperHeroes.pop(0)
-        respuesta = input("Esta el superheroe destinado a misiones interg")
-        if respuesta == "si":
-            raiz = nodoArbol.insertar_nodo(raiz, dato1)
-            return Marvel_Arbol(listaSuperHeroes)
-        elif respuesta == "no":
+        misiones.pop(0)
+        raiz = input("Esta el superheroe destinado a: ", mision1)
+        if raiz == "si":
+            nodo.izq = dato1
+            nodo.der = misiones[1]
+            raiz = nodoArbol.insertar_nodo(raiz, nodo)
+            return Marvel_Arbol(listaSuperHeroes, misiones)
+        elif raiz == "no":
+            
             
 
     
