@@ -27,3 +27,5 @@ def generador():
             print("{} => {}".format(numero, round(numero)))
             lista.append(round(numero))
     return lista
+
+print(generador)
