@@ -22,7 +22,11 @@ luego de cada atención se podrá agregar un pedido a la cola
 """
 
 class nodoCola(object):
-    info, sig = None, None
+    __slots__ = ("info", "prioridad", "sig")
+    def __init__(self, info=None, prioridad=None):
+        self.info = info
+        self.prioridad = prioridad
+        self.sig = None
 class Cola(object):
     def __init__(self):
         self.frente, self.final = None, None
@@ -36,13 +40,15 @@ class Cola(object):
             cola.final.sig = nodo
         cola.final = nodo
         cola.tamaño += 1
-    def atencion(cola):
-        dato = cola.frente.info
-        cola.frente = cola.frente.sig
-        if cola.frente is None:
-            cola.final = None
-            cola.tamaño -= 1
-        return dato
+    def atencion(self):
+        if self.frente is None:
+            return None
+        nodo = self.frente
+        self.frente = nodo.sig
+        if self.frente is None:
+            self.final = None
+        self.tamaño -= 1
+        return nodo.info
     def cola_vacia(cola):
         return cola.frente is None
     def en_frente(cola):
@@ -71,22 +77,30 @@ class Cola(object):
             print(dato)
             i += 1
 
-    def arribo_con_prioridad(cola, elemento, prioridad):
-        nodo = nodoCola()
-        nodo.info = elemento
-        nodo.prioridad = prioridad
-        if cola.frente is None or prioridad < cola.frente.prioridad:
-            nodo.sig = cola.frente
-            cola.frente = nodo
+    def arribo_con_prioridad(self, elemento, prioridad):
+        nodo = nodoCola(elemento, prioridad)
+
+        # Caso cola vacía
+        if self.frente is None:
+            self.frente = self.final = nodo
+
+        # Nueva prioridad es más alta (valor numérico menor) que la del frente
+        elif prioridad < self.frente.prioridad:
+            nodo.sig = self.frente
+            self.frente = nodo
+
         else:
-            ant = cola.frente
-            act = cola.frente.sig
-            while(act is not None and act.prioridad <= prioridad):
-                ant = act
-                act = act.sig
-            nodo.sig = act
+            ant = self.frente
+            # avanzamos hasta encontrar el lugar de inserción
+            while ant.sig and ant.sig.prioridad <= prioridad:
+                ant = ant.sig
+            nodo.sig = ant.sig
             ant.sig = nodo
-        cola.tamaño += 1
+            # si lo insertamos al final, actualizamos self.final
+            if nodo.sig is None:
+                self.final = nodo
+
+        self.tamaño += 1
 
 class nodoPila(object):
     info, sig = None, None
@@ -133,28 +147,36 @@ class Pedido(object):
         self.multiverso = multiverso
         self.descripcion = descripcion
         self.prioridad = None
-def cola_pedidos(cola, pedido, bitacora):
-    if pedido.nombre == "Gran Conquistador" or pedido.multiverso == 616 or pedido.descripcion == "El que permanece":
-       pedido.prioridad = 1
-       Cola.arribo_con_prioridad(cola, pedido, 1)
-    elif pedido.nombre == "Khan que todo lo sabe" or pedido.multiverso == 838 or pedido.descripcion == "Carnicero de Dioses":
-        pedido.prioridad = 2
-        Cola.arribo_con_prioridad(cola, pedido, 2)
+def procesa_pedidos(cola, nuevo_pedido, bitacora):
+    # Asignar prioridad según reglas
+    if (nuevo_pedido.nombre == "Gran Conquistador"
+        or nuevo_pedido.multiverso == 616
+        or "El que permanece" in nuevo_pedido.descripcion):
+        prio = 1
+    elif (nuevo_pedido.nombre == "Khan que todo lo sabe"
+          or "Carnicero de Dioses" in nuevo_pedido.descripcion
+          or nuevo_pedido.multiverso == 838):
+        prio = 2
     else:
-        pedido.prioridad = 3
-        Cola.arribo_con_prioridad(cola, pedido, 3)
-    i = Cola.tamaño(cola)
-    while i != 0:
-        Pedido = Cola.atencion(cola)
-        if Pedido.prioridad == 1:
-            Pila.apilar(bitacora, Pedido)
+        prio = 3
+
+    # Insertar en la cola
+    cola.arribo_con_prioridad(nuevo_pedido, prio)
+
+    # Atender toda la cola
+    while not cola.cola_vacia():
+        pedido_atendido = cola.atencion()
+        if pedido_atendido.prioridad == 1:
+            Pila.apilar(bitacora, pedido_atendido)
         else:
-            Cola.arribo_con_prioridad(cola, pedido, pedido.prioridad)
-    Cola.barrido(cola)
+            # Reencolar con su misma prioridad
+            cola.arribo_con_prioridad(pedido_atendido, pedido_atendido.prioridad)
+
+    # Mostrar bitácora
     Pila.barrido(bitacora)
 
 khan = Pedido("Gran Conquistador", 300, "hola")
 Cola_marv = Cola()
 bitacora_marv = Pila()
-print(cola_pedidos(Cola_marv, khan, bitacora_marv))
+print(procesa_pedidos(Cola_marv, khan, bitacora_marv))
 
