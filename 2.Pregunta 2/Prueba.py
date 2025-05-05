@@ -173,7 +173,7 @@ def procesa_pedidos(cola, nuevo_pedido, bitacora):
             cola.arribo_con_prioridad(pedido_atendido, pedido_atendido.prioridad)
 
     # Mostrar bitácora
-    Pila.barrido(bitacora)
+    return(Pila.barrido(bitacora))
 
 khan = Pedido("Gran Conquistador", 300, "hola")
 Cola_marv = Cola()
