@@ -110,7 +110,7 @@ class Cola(object):
         if cola.frente is None:
             cola.final = None
             cola.tamaño -= 1
-            return dato
+        return dato
     def cola_vacia(cola):
         return cola.frente is None
     def en_frente(cola):
