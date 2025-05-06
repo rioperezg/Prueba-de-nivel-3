@@ -8,3 +8,8 @@ realizar los barridos preorden, inorden, postorden y por nivel sobre el árbol g
  determinar la cantidad de ocurrencias de un elemento en el árbol;
  contar cuántos números pares e impares hay en el árbol
 """
+import random
+from arbol import nodoArbol, arbol_vacio, insertar_nodo, eliminar_nodo, preorden, inorden, postorden, Cola
+
+
+
