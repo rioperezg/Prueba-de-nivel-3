@@ -104,7 +104,7 @@ class Cola(object):
             cola.final.sig = nodo
         cola.final = nodo
         cola.tamaño += 1
-    def atencion(cola, dato):
+    def atencion(cola):
         dato = cola.frente.info
         cola.frente = cola.frente.sig
         if cola.frente is None:
